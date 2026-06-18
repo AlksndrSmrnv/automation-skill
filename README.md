@@ -42,15 +42,35 @@ write-autotest/
 - `~/.qwen/skills/<имя>/SKILL.md` — персональные, доступны во всех проектах;
 - `.qwen/skills/<имя>/SKILL.md` — внутри репозитория, шарятся через git.
 
-Скопируй папку скилла в нужное место, например персонально:
+Сабагенты — аналогично: `~/.qwen/agents/<имя>.md` (персонально) или `.qwen/agents/<имя>.md`
+(в репозитории).
+
+Установить нужно **оба скилла и сабагент**. Удобно класть их персонально (доступны во всех
+проектах автотестов):
 
 ```bash
-mkdir -p ~/.qwen/skills
-cp -r autotest-skill-generator ~/.qwen/skills/
+mkdir -p ~/.qwen/skills ~/.qwen/agents
+cp -r autotest-skill-generator write-autotest ~/.qwen/skills/
+cp .qwen/agents/framework-explorer.md ~/.qwen/agents/
 ```
 
-Проверь, что Qwen его видит: команда `/skills` в Qwen Code должна показать
-`autotest-skill-generator`.
+Либо положить их прямо в репозиторий автотестов, чтобы шарить через git (туда же генератор пишет
+`autotest-house-style` и скиллы-возможности):
+
+```bash
+# из корня репозитория автотестов
+mkdir -p .qwen/skills .qwen/agents
+cp -r /path/to/automation-skill/autotest-skill-generator /path/to/automation-skill/write-autotest .qwen/skills/
+cp /path/to/automation-skill/.qwen/agents/framework-explorer.md .qwen/agents/
+```
+
+Проверь, что Qwen их видит: команда `/skills` должна показать `autotest-skill-generator` и
+`write-autotest`, а `/agents` — `framework-explorer` (сабагент опционален: без него скиллы
+анализируют проект сами через read/grep/glob).
+
+> Порядок использования: сначала `autotest-skill-generator` строит библиотеку
+> (`autotest-house-style` + скиллы-возможности), затем `write-autotest` пишет по ней тесты. Чтобы
+> `write-autotest` работал, он и сгенерированные скиллы должны быть видны в одном `/skills`.
 
 ## Использование
 
