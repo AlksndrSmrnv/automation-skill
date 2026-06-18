@@ -14,7 +14,7 @@ Kubernetes и др.).
 
 ```
 autotest-skill-generator/
-├── SKILL.md                          # рабочий процесс из 5 этапов
+├── SKILL.md                          # рабочий процесс из 6 этапов
 ├── references/                       # discovery-guide, capability-taxonomy, quality-checklist
 └── templates/                        # capability-skill, house-style-skill, capability-catalog
 ```
@@ -49,7 +49,8 @@ autotest-skill-generator` или просто попроси:
 2. соберёт каталог атомарных возможностей в `.qwen/skill-catalog/_catalog.md` (вне skills-root);
 3. задаст уточняющие вопросы (что генерировать, что упущено, куда писать);
 4. создаст по скиллу на возможность + обзорный `autotest-house-style` в `.qwen/skills/`;
-5. проверит результат по чек-листу.
+5. проверит результат по чек-листу;
+6. выдаст итоговый отчёт (путь каталога, созданные/исключённые скиллы, TODO, что проверено).
 
 После генерации Qwen увидит новые скиллы в `/skills` и будет подключать их по `description`,
 когда вы пишете соответствующий шаг теста.
